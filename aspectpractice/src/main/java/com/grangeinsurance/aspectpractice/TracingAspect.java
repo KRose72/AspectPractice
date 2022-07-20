@@ -17,6 +17,9 @@ public class TracingAspect {
 	
 	@Value("${spring.datasource.username}")
 	private String username;
+	
+	@Value("${spring.datasource.password}")
+	private String password;
 
 	@Pointcut("execution(String com.grangeinsurance.aspectpractice.AspectPracticeService.sayHello(String))")
 	public void sayHelloMethod() {/* Left Empty */}
@@ -29,6 +32,7 @@ public class TracingAspect {
 	@Around ("sayHelloMethod()")
 	public String aroundMethod (ProceedingJoinPoint pjp) throws Throwable {
 		System.out.println("Around Advice for Method");
+		System.out.println(password);
 		return (String) pjp.proceed(new Object[] {username});
 	}
 }
